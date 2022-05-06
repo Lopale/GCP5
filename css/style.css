@@ -1,0 +1,18 @@
+
+
+
+h1 {
+	text-align: center;
+}
+
+main {
+	display: flex;
+    justify-content: space-between;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+main section {
+	border: 1px solid burlywood;
+	width: 100%;
+}

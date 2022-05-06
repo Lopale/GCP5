@@ -1,0 +1,46 @@
+███╗   ███╗██╗   ██╗██████╗      ██╗    ██████╗ 
+████╗ ████║██║   ██║██╔══██╗    ███║   ██╔═████╗
+██╔████╔██║██║   ██║██████╔╝    ╚██║   ██║██╔██║
+██║╚██╔╝██║╚██╗ ██╔╝██╔═══╝      ██║   ████╔╝██║
+██║ ╚═╝ ██║ ╚████╔╝ ██║          ██║██╗╚██████╔╝
+╚═╝     ╚═╝  ╚═══╝  ╚═╝          ╚═╝╚═╝ ╚═════╝ 
+                                                
+/* Page d'accueil */
+
+  Résumé du gameplay
+  Résumé de l'histoire
+  Module de connexion (qui renvois vers mon compte)
+  Lien vers la page d'inscription
+
+/* Page d'inscription */
+  
+  inscription avec login + mot de passe (crypté) + adresse email
+  faire vérfier l'adresse email
+
+/* Page mon compte */
+  
+  Affichage du pseudo
+  Possibilité de changer pseudo(login) + mot de passe + email
+  Liste des partie en cours
+  Créer une nouvelle partie
+  Supprimer un compte
+
+/* Page Story */
+
+  Partie en cours commence au dernier paragraphe lu (sinon paragraphe 1)
+  Lors d'un choix celui-ci se sauvegarde automatiquement dans la BDD (pas de retour en arrière)
+
+/* Page Lecture */
+  Pour chaque partie on peux avoir accès à une partie "Lecture" qui affiche les paragraphes du chemin parcouru
+
+
+
+
+
+
+  MVP 2
+
+  /* Sécurité */
+  Crypter les id pour le pas pouvoir tricher
+  Ne voir la page story que si on est connecter
+  Passer d'un paragraphe à l'autre en ajax
