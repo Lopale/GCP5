@@ -29,23 +29,8 @@ Résumé du site (histoire) + connexion + Création de compte
 Revois sur compte.php
 
 
-https://www.chiny.me/exercice-authentification-via-une-base-de-donnees-en-php-8-13.php
-
-
-<form action="" method="post">
-  <div>
-    <label for="name">Login: </label>
-    <input type="text" name="name" id="name" required>
-  </div>
-  <div>
-    <label for="email">Pass: </label>
-    <input type="password" name="password" id="password" required>
-  </div>
-  <div>
-    <input type="submit" value="Connexion">
-  </div>
-</form>
-
+<p>Prèt à vivre ton aventure ?</p>
+<p><a href="login.php">A l'aventure compagnon </a></p>
 
 
 <?php include('inc/footer.php');?>

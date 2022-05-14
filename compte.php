@@ -1,4 +1,19 @@
 <?php
+   session_start();
+   if($_SESSION["autoriser"]!="oui"){
+      header("location:login.php");
+      exit();
+   }
+   if(date("H")<18)
+      $bienvenue="Bonjour et bienvenue ".
+      $_SESSION["login"].
+      " dans votre espace personnel";
+   else
+      $bienvenue="Bonsoir et bienvenue ".
+      $_SESSION["login"].
+      " dans votre espace personnel";
+      $id_user = $_SESSION["id_user"];
+
 
 // https://ns350014.ip-188-165-209.eu:8443/phpMyAdmin/index.php?db=admin_GC_BDD
 
@@ -33,10 +48,13 @@ Liste des parties en cours<br/>
 Continuer => renvois directement sur le dernier pargraphe de la partie <br/>
 Lire => Met tous les paragraphes d'une partie à la suite pour former l'histoire en cours
 
+<h2><?php echo $bienvenue?></h2>
+[ <a href="deconnexion.php">Se déconnecter</a> ]
+<p>Compte N°<?php echo $id_user; ?></p>
 
 <div>
 	<h2>Nouvelle Partie</h2>
-	<a href="story.php?newstory=true">Voulez vous commencer une nouvelle partie ? </a>
+	<a href="adventure.php?newstory=true">Voulez vous commencer une nouvelle partie ? </a>
 </div>
 
 
