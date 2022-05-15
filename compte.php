@@ -64,10 +64,10 @@ Modification : SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_B
 
 <div>
 	<h2>Liste des parties</h2>
+
+  <p> Il vous reste XX sauvegardes de disponibles (sur <?php echo $max_game; ?>)</p>
 	<?php
 
-	//TMP
-	$id_user = 1;
 
   // Liste des sauvegarde
 
@@ -77,7 +77,45 @@ Modification : SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_B
   //SELECT DISTINCT(game_in_progress.id_game_in_progress) AS id_game, game_in_progress.id_user, save.id_save, max(save.date_save) AS date_derniere_save FROM game_in_progress INNER JOIN save ON save.id_game_in_progress = game_in_progress.id_game_in_progress GROUP BY game_in_progress.id_game_in_progress;
 
 
-$query = $db->prepare('SELECT DISTINCT(game_in_progress.id_game_in_progress) AS id_game, save.id_paragraphe, game_in_progress.id_user, game_in_progress.id_save, max(save.date_save) AS date_derniere_save FROM game_in_progress INNER JOIN save ON save.id_game_in_progress = game_in_progress.id_game_in_progress WHERE game_in_progress.id_user=:id_user GROUP BY game_in_progress.id_game_in_progress');
+//$query = $db->prepare('SELECT DISTINCT(game_in_progress.id_game_in_progress) AS id_game, save.id_paragraphe, game_in_progress.id_user, game_in_progress.id_save, max(save.date_save) AS date_derniere_save FROM game_in_progress INNER JOIN save ON save.id_game_in_progress = game_in_progress.id_game_in_progress WHERE game_in_progress.id_user=:id_user GROUP BY game_in_progress.id_game_in_progress');
+
+
+/*
+$query = $db->prepare("SELECT
+    id_game_in_progress,
+    id_paragraphe,
+    date_save
+FROM
+    save where id_save in (
+        SELECT
+            max(s.id_save) as 'MAX_ID_SAVE'
+        FROM 
+            game_in_progress gip
+            INNER JOIN save s on s.id_game_in_progress = gip.id_game_in_progress
+            WHERE gip.id_user=:id_user
+            group by s.id_game_in_progress
+    )"
+  );
+*/
+$query = $db->prepare("SELECT
+    id_game_in_progress,
+    id_paragraphe,
+    date_save,
+    story.id_story,
+    story.name
+FROM
+story,
+    save where id_save in (
+        SELECT
+            max(s.id_save) as 'MAX_ID_SAVE'
+        FROM 
+            game_in_progress gip
+            INNER JOIN save s on s.id_game_in_progress = gip.id_game_in_progress
+            WHERE gip.id_user=:id_user
+      AND story.id_story = save.id_story
+            group by s.id_game_in_progress
+    )"
+  );
 
 
   $query->execute(array( 'id_user' => $id_user ));
@@ -94,18 +132,25 @@ $query = $db->prepare('SELECT DISTINCT(game_in_progress.id_game_in_progress) AS 
 
 <?php
   foreach ($query as $row) {
-      $id_game_in_progress = $row['id_game'];
-      $id_user = $row['id_user'];
-      $id_save = $row['id_save'];
-      $date_sauvegarde = $row['date_derniere_save'];
+      $id_game_in_progress = $row['id_game_in_progress'];
+      // $id_user = $row['id_user'];
+      // $id_save = $row['id_save'];
+      $date_sauvegarde = $row['date_save'];
       $id_last_paragraphe = $row['id_paragraphe'];
+      $story_name = $row['name'];
+      $id_story = $row['id_story'];
     ?>
  	
  		<tr>
- 			<td>Sauvegarde N°<?php echo $id_game_in_progress;?> du <?php echo $date_sauvegarde; ?></td>
+ 			<td>Sauvegarde N°<?php echo $id_game_in_progress;?> du <?php echo $date_sauvegarde; ?> de l'histoire <?php echo $story_name; ?></td>
  			<td><?php echo $id_user;?></td>
  			<td><?php //echo $id_save;?></td>
- 			<td><a href="story.php?id_paragraphe_out=<?php echo $id_last_paragraphe; ?>">Continuer au paragraphe n°<?php echo $id_last_paragraphe; ?></a></td>
+ 			<td>
+        <!-- <a href="story.php?id_paragraphe_out=<?php echo $id_last_paragraphe; ?>">Continuer au paragraphe n°<?php echo $id_last_paragraphe; ?></a> -->
+        <a href="story.php?id_user=<?php echo $id_user; ?>">Continuer l'aventure </a>
+      </td>
+      <td><a href="story.php?id_user=<?php echo $id_user;?>&id_game_in_progress=<?php echo $id_game_in_progress;?>&id_story=<?php echo $id_story;?>"> Lire l'histoire</a></td>
+      <td>Supprimer (mettre validation)</td>
  		</tr>
     <?php 
   }

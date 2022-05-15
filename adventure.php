@@ -1,5 +1,10 @@
 <?php
-
+session_start();
+   if($_SESSION["autoriser"]!="oui"){
+      header("location:login.php");
+      exit();
+   }
+   
 // https://ns350014.ip-188-165-209.eu:8443/phpMyAdmin/index.php?db=admin_GC_BDD
 
 
