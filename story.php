@@ -1,6 +1,6 @@
 <?php
 session_start();
-   if($_SESSION["autoriser"]!="oui"){
+   if(!$_SESSION["login"]){
       header("location:login.php");
       exit();
    }
@@ -42,11 +42,10 @@ if($debug){
 
 <?php
 
-  $id_user = $_GET['id_user'];
   $id_story = $_GET['id_story'];
   $id_game_in_progress = $_GET['id_game_in_progress'];
 
-  if($id_user != $_SESSION["id_user"] ){
+  if(!$_SESSION["login"] ){
     echo "vous n'avez pas le droit d'accèder à cette page !";
     die();
   }
@@ -65,7 +64,7 @@ if($debug){
     AND game_in_progress.id_game_in_progress = :id_game_in_progress
     ORDER BY save.id_save ASC
     ');
-  $query->execute(array( 'id_story' => $id_story, 'id_user' => $id_user, 'id_game_in_progress' => $id_game_in_progress  ));
+  $query->execute(array( 'id_story' => $id_story, 'id_user' => $_SESSION["id_user"], 'id_game_in_progress' => $id_game_in_progress  ));
  
   foreach ($query as $row) {
       echo '<h2>'.$row['title'].'</h2>';

@@ -15,13 +15,12 @@
    $valider=$_POST["valider"];
    $erreur="";
    if(isset($valider)){
-      $sel=$db->prepare("select * from user where login=? and pass=? limit 1");
+      $sel=$db->prepare("select login,id_user from user where login=? and pass=? limit 1");
       $sel->execute(array($login,$pass));
       $tab=$sel->fetchAll();
       if(count($tab)>0){
          $_SESSION["login"]=($tab[0]["login"]);
          $_SESSION["id_user"]=($tab[0]["id_user"]);
-         $_SESSION["autoriser"]="oui";
          header("location:compte.php");
       }
       else

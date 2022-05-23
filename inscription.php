@@ -15,12 +15,24 @@ if($debug){
   }
 }
 
-   $login=$_POST["login"];
-   $pass=$_POST["pass"];
-   $repass=$_POST["repass"];
-   $mail=$_POST["mail"];
-   $valider=$_POST["valider"];
+
+if(isset($valider)){
+   $login     = $_POST["login"];
+   $pass      = $_POST["pass"];
+   $repass    = $_POST["repass"];
+   $mail      = $_POST["mail"];
+   $valider   = $_POST["valider"];
+}else{
+    $login    = "";
+    $pass     = "";
+    $repass   = "";
+    $mail     = "";
+    $valider  = "";
+}
    $erreur="";
+
+
+
    if(isset($valider)){
 
       if(empty($mail)) $erreur="Email laissé vide!";
@@ -33,11 +45,11 @@ if($debug){
      
       else{
          include("inc/connect.php");
-         $sel=$db->prepare("select id_user from user where login=? limit 1");
-         $sel->execute(array($login));
+         $sel=$db->prepare("select id_user from user where login=? or mail=? limit 1");
+         $sel->execute(array($login,$mail));
          $tab=$sel->fetchAll();
          if(count($tab)>0)
-            $erreur="Login existe déjà!";
+            $erreur="Login ou mail déjà enregistré !";
          else{
 
           // Cryptage : https://www.php.net/manual/fr/function.hash.php
