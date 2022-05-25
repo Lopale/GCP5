@@ -15,41 +15,54 @@ if($debug){
   }
 }
 
+   if(isset($_POST["valider"])){
+    $login     = $_POST["login"];
+    $pass      = $_POST["pass"];
+    $repass    = $_POST["repass"];
+    $mail      = $_POST["mail"];
+    //$erreur    = "";
 
-if(isset($valider)){
-   $login     = $_POST["login"];
-   $pass      = $_POST["pass"];
-   $repass    = $_POST["repass"];
-   $mail      = $_POST["mail"];
-   $valider   = $_POST["valider"];
-}else{
-    $login    = "";
-    $pass     = "";
-    $repass   = "";
-    $mail     = "";
-    $valider  = "";
-}
-   $erreur="";
+    $arrayError = array();
 
 
-
-   if(isset($valider)){
-
-      if(empty($mail)) $erreur="Email laissé vide!";
+        if(empty($mail)){
+           // $erreur      .= "Email laissé vide !<br/>";
+            array_push($arrayError,"Email laissé vide !");
+        } 
      
-      elseif(empty($login)) $erreur="Login laissé vide!";
+      if(empty($login)){
+           // $erreur     .= "Login laissé vide !<br/>";   
+            array_push($arrayError,"Login laissé vide !");     
+      } 
      
-      elseif(empty($pass)) $erreur="Mot de passe laissé vide!";
+      if(empty($pass)){
+       // $erreur      .= "Mot de passe laissé vide !<br/>";
+        array_push($arrayError,"Mot de passe laissé vide !");   
+      } 
      
-      elseif($pass!=$repass) $erreur="Mots de passe non identiques!";
+      if($pass!=$repass){
+        //$erreur    .= "Mots de passe non identiques !<br/>";
+        array_push($arrayError,"Mots de passe non identiques !");  
+      } 
      
-      else{
+      //if(!$erreur){
+      if(empty($arrayError)){
          include("inc/connect.php");
-         $sel=$db->prepare("select id_user from user where login=? or mail=? limit 1");
+         $sel=$db->prepare("select id_user, login, mail from user where login=? or mail=? limit 1");
          $sel->execute(array($login,$mail));
          $tab=$sel->fetchAll();
-         if(count($tab)>0)
-            $erreur="Login ou mail déjà enregistré !";
+         // var_dump($tab);
+         // var_dump($tab[0]);
+         if(count($tab)>0){
+            if($tab[0]['mail'] == $mail ){
+                // $erreur  .= "Email déjà enregistré !<br/>";
+                array_push($arrayError,"Email déjà enregistré !");  
+            }
+            if($tab[0]['login'] == $login ){
+                // $erreur .= "Login déjà enregistré !<br/>";
+                array_push($arrayError,"Login déjà enregistré !");  
+            }
+        }            
          else{
 
           // Cryptage : https://www.php.net/manual/fr/function.hash.php
@@ -60,6 +73,7 @@ if(isset($valider)){
               header("location:login.php");
             }else{
               echo "l'enregistrement n'a pas fonctionné";
+                array_push($arrayError,"l'enregistrement n'a pas fonctionné !"); 
             }
          }   
       } 
@@ -93,11 +107,26 @@ if($debug){
 
 Création de compte
 
+<?php //var_dump($arrayError); ?>
+<div class="erreur">
+    <?php 
+    if(!empty($arrayError)){
 
-<div class="erreur"><?php echo $erreur ?></div>
+        foreach($arrayError as $element){
+           echo $element . '<br />'; // affichera $arrayError[0], $arrayError[1] etc.
+        }
+        //print_r($arrayError);
+    }
+    ?>
+
+    <?php// if(isset($erreur)){ echo $erreur; } ?>
+</div>
+
+
+
 <form name="fo" method="post" action="">
-   <input type="text" name="login" placeholder="Login" value="<?php echo $login?>" required /><br />
-   <input type="email" name="mail" placeholder="Mail" value="<?php echo $mail?>" required /><br />
+   <input type="text" name="login" placeholder="Login" value="<?php if(isset($login)){ echo $login; } ?>" required /><br />
+   <input type="email" name="mail" placeholder="Mail" value="<?php if(isset($mail)){ echo $mail; } ?>" required /><br />
    <input type="password" name="pass" placeholder="Mot de passe" required /><br />
    <input type="password" name="repass" placeholder="Confirmer Mot de passe" required /><br />
    <input type="submit" name="valider" value="S'inscrire" />

@@ -24,6 +24,8 @@
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/jQuery.js"></script>
   <script src="js/script.js"></script>
 </head>
 <body>

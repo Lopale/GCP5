@@ -7,7 +7,7 @@
 
     if(date("H") < 18) $greeting = "Bonjour"; else $greeting = "Bonsoir";
     
-    $bienvenue = $greeting." et bienvenue ".$_SESSION['login']. " dans votre espace personnel";
+    $bienvenue = "<span class='greeting'>".$greeting."</span> et bienvenue ".$_SESSION['login']. " dans votre espace personnel";
     
 
 
@@ -42,6 +42,7 @@ Option : changer login / pwd<br/>
 
 
 <h2><?php echo $bienvenue?></h2>
+
 [ <a href="deconnexion.php">Se déconnecter</a> ]
 <p>Compte N°<?php echo $_SESSION["id_user"]; ?></p>
 
