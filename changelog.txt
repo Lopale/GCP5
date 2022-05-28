@@ -22,8 +22,8 @@
 /* Page mon compte */
   
   X Affichage du pseudo
-  Possibilité de changer pseudo(login)
-  Possibilité de changer mot de passe
+  X Possibilité de changer pseudo(login)
+  X Possibilité de changer mot de passe
   X Liste des partie en cours
   X Créer une nouvelle partie
   Supprimer un compte
@@ -43,7 +43,8 @@
   Naheulbeuk
   Gaming Campus
 
-
+/* BDD */
+  X Relations
 
 V2
 /* Page d'inscription */
