@@ -25,8 +25,14 @@ if($debug){
 
 <?php include('inc/header.php');?>
 
-Résumé du site (histoire) + connexion + Création de compte
-Revois sur compte.php
+Résumé du site (histoire) <br/><br/><br/>
+
+<?php
+if(isset($_GET["SuppCompteValid"])){
+    echo "<div class='valid'>Votre compte a été supprimé !</div>";
+}
+?>
+
 
 
 <p>Prèt à vivre ton aventure ?</p>

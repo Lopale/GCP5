@@ -57,7 +57,7 @@ Option : changer login / pwd<br/>
     <h3>Option</h3>
     <a href="change-login.php">Modifier Mon login</a><br/>
     <a href="change-mdp.php">Modifier mon mot de passe</a><br/>
-    <a href="suppr-compte.php">Supprimer mon compte</a>
+    <a href="javascript:if(confirm('&Ecirc;tes-vous sûr de vouloir supprimer votre compte (irréversible) ?')) document.location.href='suppr-compte.php'">Supprimer mon compte</a>
 </div>
 
 <div>
@@ -144,7 +144,8 @@ story,
         <!-- <a href="adventure.php?">Continuer l'aventure </a> -->
       </td>
       <td><a href="story.php?id_game_in_progress=<?php echo $id_game_in_progress;?>&id_story=<?php echo $id_story;?>"> Lire l'histoire</a></td>
-      <td>Supprimer (mettre validation)</td>
+      <td>
+    <a href="javascript:if(confirm('&Ecirc;tes-vous sûr de vouloir supprimer cette Sauvegarde (irréversible) ?')) document.location.href='suppr-save.php'">Supprimer</a>)</td>
  		</tr>
     <?php 
   }

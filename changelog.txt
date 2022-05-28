@@ -43,6 +43,8 @@
   Naheulbeuk
   Gaming Campus
 
+/* Toutes les pages : intégrer Title*/
+
 /* BDD */
   X Relations
 
