@@ -29,7 +29,13 @@ if($debug){
 
 //Connexion à la BDD
 
-  
+if(isset($_GET["MdpValid"])){
+    echo "<div class='valid'>Votre nouveau mot de passe est enregistré !</div>";
+}
+
+if(isset($_GET["LoginValid"])){
+    echo "<div class='valid'>Votre nouveau Login est enregistré !</div>";
+}
 
 ?>
 
@@ -47,10 +53,12 @@ Option : changer login / pwd<br/>
 <p>Compte N°<?php echo $_SESSION["id_user"]; ?></p>
 
 
-
-<!-- Avant :ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION 
-Modification : SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))-->
-
+<div>
+    <h3>Option</h3>
+    <a href="change-login.php">Modifier Mon login</a><br/>
+    <a href="change-mdp.php">Modifier mon mot de passe</a><br/>
+    <a href="suppr-compte.php">Supprimer mon compte</a>
+</div>
 
 <div>
 	<h2>Liste des parties</h2>
@@ -82,34 +90,7 @@ Modification : SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_B
 
 
 <?php
-  // Liste des sauvegarde
-
-
-  // SELECT * FROM game_in_progress INNER JOIN save ON game_in_progress.id_game_in_progress = save.id_game_in_progress WHERE game_in_progress.id_user=1
-
-  //SELECT DISTINCT(game_in_progress.id_game_in_progress) AS id_game, game_in_progress.id_user, save.id_save, max(save.date_save) AS date_derniere_save FROM game_in_progress INNER JOIN save ON save.id_game_in_progress = game_in_progress.id_game_in_progress GROUP BY game_in_progress.id_game_in_progress;
-
-
-//$query = $db->prepare('SELECT DISTINCT(game_in_progress.id_game_in_progress) AS id_game, save.id_paragraphe, game_in_progress.id_user, game_in_progress.id_save, max(save.date_save) AS date_derniere_save FROM game_in_progress INNER JOIN save ON save.id_game_in_progress = game_in_progress.id_game_in_progress WHERE game_in_progress.id_user=:id_user GROUP BY game_in_progress.id_game_in_progress');
-
-
-/*
-$query = $db->prepare("SELECT
-    id_game_in_progress,
-    id_paragraphe,
-    date_save
-FROM
-    save where id_save in (
-        SELECT
-            max(s.id_save) as 'MAX_ID_SAVE'
-        FROM 
-            game_in_progress gip
-            INNER JOIN save s on s.id_game_in_progress = gip.id_game_in_progress
-            WHERE gip.id_user=:id_user
-            group by s.id_game_in_progress
-    )"
-  );
-*/
+ 
 $query = $db->prepare("SELECT
     id_game_in_progress,
     id_paragraphe,
@@ -159,8 +140,8 @@ story,
  			<td><?php echo $_SESSION["id_user"];?></td>
  			<td><?php //echo $id_save;?></td>
  			<td>
-        <!-- <a href="story.php?id_paragraphe_out=<?php echo $id_last_paragraphe; ?>">Continuer au paragraphe n°<?php echo $id_last_paragraphe; ?></a> -->
-        <a href="adventure.php">Continuer l'aventure </a>
+        <a href="adventure.php?id_paragraphe_out=<?php echo $id_last_paragraphe; ?>&id_game_in_progress=<?php echo $id_game_in_progress;?>&id_story=<?php echo $id_story;?>">Continuer au paragraphe n°<?php echo $id_last_paragraphe; ?></a>
+        <!-- <a href="adventure.php?">Continuer l'aventure </a> -->
       </td>
       <td><a href="story.php?id_game_in_progress=<?php echo $id_game_in_progress;?>&id_story=<?php echo $id_story;?>"> Lire l'histoire</a></td>
       <td>Supprimer (mettre validation)</td>
@@ -170,13 +151,6 @@ story,
 ?>
 
  	</table>
-<!-- SELECT save.id_save,save.id_game_in_progress,save.id_paragraphe,game_in_progress.id_game_in_progress,game_in_progress.id_user,game_in_progress.id_save,save.date_save
-FROM save,game_in_progress
-WHERE game_in_progress.id_user=1 AND game_in_progress.id_game_in_progress = save.id_game_in_progress
-GROUP BY game_in_progress.id_game_in_progress
-ORDER BY game_in_progress.id_game_in_progress; -->
-
-
 
 
 </div>

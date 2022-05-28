@@ -47,9 +47,18 @@ if (isset($_GET['newstory'])) {
 
 
 
-  if (isset($_GET['id_paragraphe_out']) && !empty($_GET['id_paragraphe_out'])) {
-  
-   $id_paragraphe_en_cours = $_GET['id_paragraphe_out'];
+ if(isset($_GET['id_paragraphe_out']) && !empty($_GET['id_paragraphe_out'])) {
+ 
+  /*
+  Vérifier si : 
+    - le paragragraphe d'entrée et bien le bon par rapport au choix
+    - que l'id de l'histoire est le bon par rapport à la sauvegarde
+  Si oui, 
+    - Vérfier que l'enregistrement n'existe pas encore
+  SI non tout enregistrer
+
+  */
+   $id_paragraphe_en_cours = $_GET["id_paragraphe_out"];
    
   }else{
     $id_paragraphe_en_cours = 1;
@@ -77,7 +86,7 @@ if (isset($_GET['newstory'])) {
       $texte_choice = $row['texte_choice'];
       $id_paragraphe_out = $row['id_paragraphe_out'];
     ?>
-    <a href="story.php?id_paragraphe_out=<?php echo $id_paragraphe_out; ?>"><?php echo $texte_choice; ?></a>
+    <a href="adventure.php?id_paragraphe_out=<?php echo $id_paragraphe_out; ?>"><?php echo $texte_choice; ?></a>
     <?php 
   }
 

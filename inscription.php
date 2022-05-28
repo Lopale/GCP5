@@ -122,13 +122,13 @@ Création de compte
     <?php// if(isset($erreur)){ echo $erreur; } ?>
 </div>
 
-
+<!-- https://www.developpez.net/forums/d1417324/webmasters-developpement-web/balisage-x-html-validation-w3c/modification-pattern-balise-input-password/ -->
 
 <form name="fo" method="post" action="">
    <input type="text" name="login" placeholder="Login" value="<?php if(isset($login)){ echo $login; } ?>" required /><br />
    <input type="email" name="mail" placeholder="Mail" value="<?php if(isset($mail)){ echo $mail; } ?>" required /><br />
-   <input type="password" name="pass" placeholder="Mot de passe" required /><br />
-   <input type="password" name="repass" placeholder="Confirmer Mot de passe" required /><br />
+   <input id="mdp" type="password" name="pass" placeholder="Mot de passe" minlength="6" pattern=".[a-zA-Z0-9]{6,}" title="6 caractères alphanumériques minimum" onchange="form.mdp_confirm.pattern = (this.value == '' ? '.[a-zA-Z0-9]{6,}' : this.value);"/><br />
+   <input type="password" name="repass" placeholder="Confirmer Mot de passe" minlength="6" required  pattern=".[a-zA-Z0-9]{6,}" title="6 caractères alphanumériques minimum" /><br />
    <input type="submit" name="valider" value="S'inscrire" />
 </form>
 

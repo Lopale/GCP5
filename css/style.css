@@ -16,3 +16,11 @@ main section {
 	border: 1px solid burlywood;
 	width: 100%;
 }
+
+.erreur, .erreur p {
+	color: red;
+}
+
+.valid, .valid p {
+	color: green;
+}

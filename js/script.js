@@ -12,7 +12,6 @@ function greeting(){
     $(".greeting").html(myGreeting);
 }
 
-
 $( document ).ready(function() {
     console.log( "ready!" );
     greeting();

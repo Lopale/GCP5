@@ -15,12 +15,15 @@
 /* Page d'inscription */
   
   X inscription avec login + mot de passe (crypté) + adresse email
-  faire vérfier l'adresse email
+  X Vérifier patern MDP avec HTML
+  Vérifier patern MDP avec JS
+  Vérifier patern MDP avec PHP
 
 /* Page mon compte */
   
   X Affichage du pseudo
-  Possibilité de changer pseudo(login) + mot de passe + email
+  Possibilité de changer pseudo(login)
+  Possibilité de changer mot de passe
   X Liste des partie en cours
   X Créer une nouvelle partie
   Supprimer un compte
@@ -33,3 +36,15 @@
 
 /* Page Lecture */
   X Pour chaque partie on peux avoir accès à une partie "Lecture" qui affiche les paragraphes du chemin parcouru
+
+/* Page Crédits */
+  Image
+  Graphisme
+  Naheulbeuk
+  Gaming Campus
+
+
+
+V2
+/* Page d'inscription */
+  faire vérfier l'adresse email
