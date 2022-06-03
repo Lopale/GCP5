@@ -1,5 +1,10 @@
 <?php
    session_start();
    session_destroy();
-   header("location:login.php");
+
+   if(isset($_GET["supprMDP"])){
+      header("location:index.php?SuppCompteValid");
+   }else{
+      header("location:login.php");
+   }
 ?>

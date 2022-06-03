@@ -26,7 +26,8 @@
   X Possibilité de changer mot de passe
   X Liste des partie en cours
   X Créer une nouvelle partie
-  Supprimer un compte
+  X Supprimer un compte
+  X Supprimer un compte après saisie du MDP
   Supprimer une partie
 
 /* Page Story */
