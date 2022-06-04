@@ -37,6 +37,11 @@ if(isset($_GET["LoginValid"])){
     echo "<div class='valid'>Votre nouveau Login est enregistré !</div>";
 }
 
+if(isset($_GET["supprSave"])){
+    echo "<div class='valid'>Votre sauvegarde a été supprimé !</div>";
+}
+
+
 ?>
 
 <?php include('inc/connect.php');?>
@@ -145,7 +150,7 @@ story,
       </td>
       <td><a href="story.php?id_game_in_progress=<?php echo $id_game_in_progress;?>&id_story=<?php echo $id_story;?>"> Lire l'histoire</a></td>
       <td>
-    <a href="javascript:if(confirm('&Ecirc;tes-vous sûr de vouloir supprimer cette Sauvegarde (irréversible) ?')) document.location.href='suppr-save.php'">Supprimer</a>)</td>
+    <a href="javascript:if(confirm('&Ecirc;tes-vous sûr de vouloir supprimer cette Sauvegarde (irréversible) ?')) document.location.href='suppr-save.php?game_in_progress=<?php echo $id_game_in_progress; ?>'">Supprimer</a>)</td>
  		</tr>
     <?php 
   }

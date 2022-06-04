@@ -23,7 +23,6 @@ if(isset($_POST["valider"])){
     $pass      = $_POST["pass"];
     $arrayError = array();
 
-
     if(empty($pass)){
         array_push($arrayError,"Mot de passe laissé vide !");
     } 
@@ -33,11 +32,11 @@ if(isset($_POST["valider"])){
         $sel->execute(array($_SESSION["login"],hash('sha256',$pass)));
         $tab=$sel->fetchAll();
         if(count($tab)>0){
-             $sth = $db->prepare('DELETE FROM user WHERE login = :login AND id_user= :id_user ;');
+             $sth = $db->prepare('DELETE FROM game_in_progress WHERE id_game_in_progress = :id_game_in_progress AND id_user= :id_user ;');
               if (
-              $sth->execute(array(':login' => $_SESSION["login"], 'id_user' => $_SESSION["id_user"]))){
-                  //array_push($arrayError,"l'effacement a fonctionné !"); 
-                  header("location:deconnexion.php?supprMDP=true");
+              $sth->execute(array(':id_game_in_progress' => $_GET["game_in_progress"], 'id_user' => $_SESSION["id_user"]))){
+                    array_push($arrayError,"l'effacement a fonctionné !"); 
+                    header("location:compte.php?supprSave=true");
               }else{
                   array_push($arrayError,"l'effacement n'a pas fonctionné !"); 
               }
@@ -58,9 +57,9 @@ if(isset($_POST["valider"])){
 
 ?>
 
-<h1>Suppression de compte</h1>
+<h1>Suppression de sauvegarde</h1>
 
-<p>Vous allez supprimer votre compte. Pour confirmer merci de saisir à nouveau votre mot de passe</p>
+<p>Vous allez supprimer votre sauvegarde. Pour confirmer merci de saisir à nouveau votre mot de passe</p>
 
 
 <div class="erreur">
@@ -76,7 +75,7 @@ if(isset($_POST["valider"])){
 
       <form name="fo" method="post" action="">
          <input type="password" name="pass" placeholder="Mot de passe" />
-         <input type="submit" name="valider" value="Supprimer mon compte" />
+         <input type="submit" name="valider" value="Supprimer mon sauvegarde" />
       </form>
 
 
