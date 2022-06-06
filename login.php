@@ -28,28 +28,19 @@
    }
 
 }
-
-
-  
-
 ?>
-
-
 
 <?php include('inc/header.php');?>
 
 Création de compte
 
-
-<body onLoad="document.fo.login.focus()">
-      <h1>Authentification [ <a href="inscription.php">Créer un compte</a> ]</h1>
-      <div class="erreur"><?php echo $erreur ?></div>
-      <form name="fo" method="post" action="">
-         <input type="text" name="login" placeholder="Login" /><br />
-         <input type="password" name="pass" placeholder="Mot de passe" /><br />
-         <input type="submit" name="valider" value="S'authentifier" />
-      </form>
-   </body>
+<h1>Authentification [ <a href="inscription.php">Créer un compte</a> ]</h1>
+<div class="erreur"><?php echo $erreur ?></div>
+<form name="fo" method="post" action="">
+   <input type="text" name="login" placeholder="Login" /><br />
+   <input type="password" name="pass" placeholder="Mot de passe" /><br />
+   <input type="submit" name="valider" value="S'authentifier" />
+</form>
 
 
 

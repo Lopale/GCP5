@@ -145,7 +145,7 @@ story,
  			<td><?php echo $_SESSION["id_user"];?></td>
  			<td><?php //echo $id_save;?></td>
  			<td>
-        <a href="adventure.php?id_paragraphe_out=<?php echo $id_last_paragraphe; ?>&id_game_in_progress=<?php echo $id_game_in_progress;?>&id_story=<?php echo $id_story;?>">Continuer au paragraphe n°<?php echo $id_last_paragraphe; ?></a>
+        <a href="adventure.php?id_paragraphe_out=<?php echo $id_last_paragraphe; ?>&id_game_in_progress=<?php echo $id_game_in_progress;?>&id_story=<?php echo $id_story;?>&continue=true">Continuer au paragraphe n°<?php echo $id_last_paragraphe; ?></a>
         <!-- <a href="adventure.php?">Continuer l'aventure </a> -->
       </td>
       <td><a href="story.php?id_game_in_progress=<?php echo $id_game_in_progress;?>&id_story=<?php echo $id_story;?>"> Lire l'histoire</a></td>
